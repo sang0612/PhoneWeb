@@ -1,0 +1,98 @@
+.review-container {
+  margin-top: 20px;
+}
+
+.review-form {
+  margin-bottom: 20px;
+}
+
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.review-form button {
+  margin-top: 10px;
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.review-form button[disabled] {
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background-color: #dc3545; /* Red color for cancel button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 10px; /* Space between submit and cancel buttons */
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review-actions {
+  margin-top: 10px;
+}
+
+.review-actions .edit-button,
+.toggle-button {
+  background-color: #007bff; /* Blue for edit and toggle buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px; /* Space between buttons */
+}
+
+.review-actions .edit-button:hover,
+.toggle-button:hover {
+  background-color: #0056b3; /* Darker blue shade on hover */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Red for delete button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red shade on hover */
+}
+
+.no-reviews {
+  margin-top: 20px;
+  font-style: italic;
+  color: #6c757d;
+}

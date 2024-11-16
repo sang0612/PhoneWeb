@@ -1,0 +1,224 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="cart-container">
+    <h1>Quản lý sản phẩm</h1>
+  
+   
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Danh sách sản phẩm</h2>
+        <div class="search-filter">
+          <input type="text" [(ngModel)]="filter" (input)="loadProducts()" placeholder="Search by name" />
+          <!-- <select [(ngModel)]="sortBy" (change)="loadProducts()">
+            <option value="name">Name</option>
+            <option value="id">ID</option>
+          </select> -->
+        </div>
+        <button type="button" class="btn-them" (click)="openCreateProductModal()">Thêm sản phẩm</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>ID</th>
+              <th>Hình ảnh</th>
+              <th>Tên sản phẩm</th>
+              <th>Mô tả</th>
+              <th>Giá</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products,let i = index" (click)="getProductById(product.id)">
+              <td>{{ i + 1 }}</td>
+              <td>{{ product.id }}</td>
+              <td><img [src]="product.image" alt="{{ product.name }}" width="50"></td>
+              <td><a href="javascript:void(0)">{{ product.name }}</a></td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.price }}</td>
+              
+              <td class="text-center">
+                <button class="btn btn-danger" (click)="deleteProduct(product.id)">Xóa</button>
+                <button class="btn btn-primary" (click)="openProductDetailModal(product)">Sửa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination">
+        <button (click)="pageIndex = pageIndex - 1; loadProducts()" [disabled]="pageIndex <= 1">
+          Previous
+        </button>
+        <span>Page {{ pageIndex }}</span>
+        <button
+          (click)="pageIndex = pageIndex + 1; loadProducts()"
+          [disabled]="paginateResult.totalPages <= pageIndex"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  
+      <!-- <div class="col-md-6" *ngIf="currentProduct">
+        <h2>Thông tin sản phẩm</h2>
+        <form>
+          <div class="form-group">
+            <label for="productName">Tên sản phẩm:</label>
+            <input type="text" class="form-control" id="productName" [(ngModel)]="currentProduct.name" name="productName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="currentProduct.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="number" class="form-control" id="price" [(ngModel)]="currentProduct.price" name="price">
+          </div>
+          <div class="form-group">
+            <label for="image">Hình ảnh:</label>
+            <input type="text" class="form-control" id="image" [(ngModel)]="currentProduct.image" name="image">
+          </div>
+          <div class="form-group">
+            <label for="brandName">Hãng:</label>
+            <input type="text" class="form-control" id="brandName" [(ngModel)]="currentProduct.brandName" name="brandName">
+          </div>
+          <div class="form-group">
+            <label for="promotionName">Chương trình khuyến mại:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="currentProduct.promotionName" name="promotionName">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="updateProduct()">Cập nhật</button>
+        </form>
+      </div> -->
+
+      <!-- Modal Thông tin sản phẩm -->
+<div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productDetailModalLabel">Thông tin sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="productName">Tên sản phẩm:</label>
+            <input type="text" class="form-control" id="productName" [(ngModel)]="currentProduct.name" name="productName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="currentProduct.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="number" class="form-control" id="price" [(ngModel)]="currentProduct.price" name="price">
+          </div>
+          <div class="form-group">
+            <label for="image">Hình ảnh:</label>
+            <input type="text" class="form-control" id="image" [(ngModel)]="currentProduct.image" name="image">
+          </div>
+          <div class="form-group">
+            <label for="brandName">Hãng:</label>
+            <input type="text" class="form-control" id="brandName" [(ngModel)]="currentProduct.brandName" name="brandName">
+          </div>
+          <div class="form-group">
+            <label for="promotionName">Chương trình khuyến mại:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="currentProduct.promotionName" name="promotionName">
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="updateProduct()">Cập nhật</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateProduct()">Cập nhật</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  
+    <!-- <div class="cart-container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Tạo sản phẩm mới</h2>
+        <form>
+          <div class="form-group">
+            <label for="productName">Tên sản phẩm:</label>
+            <input type="text" class="form-control" id="productName" [(ngModel)]="newProduct.name" name="productName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="description" id="description" [(ngModel)]="newProduct.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="price" class="form-control" id="price" [(ngModel)]="newProduct.price" name="price">
+          </div>
+          <div class="form-group">
+            <label for="image">Hình ảnh:</label>
+            <input type="text" class="form-control" id="image" [(ngModel)]="newProduct.image" name="image">
+          </div>
+          <div class="form-group">
+            <label for="brandName">Hãng:</label>
+            <input type="text" class="form-control" id="brandName" [(ngModel)]="newProduct.brandName" name="brandName">
+          </div>
+          <div class="form-group">
+            <label for="promotionName">Chương trình khuyến mại:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="newProduct.promotionName" name="promotionName">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="createProduct(newProduct.name, newProduct.description, newProduct.price, newProduct.image,newProduct.brandName,newProduct.promotionName)">
+            Tạo sản phẩm
+          </button>
+        </form>
+      </div>
+    </div>
+    </div> -->
+
+    <!-- Modal Tạo sản phẩm mới -->
+<div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createProductModalLabel">Tạo sản phẩm mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="productName">Tên sản phẩm:</label>
+            <input type="text" class="form-control" id="productName" [(ngModel)]="newProduct.name" name="productName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="newProduct.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="number" class="form-control" id="price" [(ngModel)]="newProduct.price" name="price">
+          </div>
+          <div class="form-group">
+            <label for="image">Hình ảnh:</label>
+            <input type="text" class="form-control" id="image" [(ngModel)]="newProduct.image" name="image">
+          </div>
+          <div class="form-group">
+            <label for="brandName">Hãng:</label>
+            <input type="text" class="form-control" id="brandName" [(ngModel)]="newProduct.brandName" name="brandName">
+          </div>
+          <div class="form-group">
+            <label for="promotionName">Chương trình khuyến mại:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="newProduct.promotionName" name="promotionName">
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="createProduct(newProduct.name, newProduct.description, newProduct.price, newProduct.image, newProduct.brandName, newProduct.promotionName)">Tạo sản phẩm</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="createProduct(newProduct.name, newProduct.description, newProduct.price, newProduct.image, newProduct.brandName, newProduct.promotionName)" data-bs-dismiss="modal">Tạo sản phẩm</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+</div>
+<app-footer></app-footer>
+
+ 

@@ -1,0 +1,69 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main {
+    flex: 1; /* Cho phép main mở rộng để lấp đầy không gian trống */
+}
+.cart{
+    background-color: #778899;
+}
+app-footer {
+    margin-top: auto;
+}
+
+.bg-custom {
+    background-color: #3f6184;
+}
+
+.text-white {
+    color: white;
+}
+
+.bg-custom-select {
+    background-color: #3f6184;
+    border: 1px solid white;
+}
+
+.bg-custom-select option {
+    background-color: white;
+    color: black;
+}
+
+.btn-primary {
+    background-color: #5faeb6;
+    border: none;
+  }
+
+.custom-padding {
+    padding-left: 400px;
+    padding-right: 200px;
+}
+
+.custom-heading {
+    font-size: 3rem; /* Tăng cỡ chữ cho tiêu đề */
+    font-weight: bold; /* Làm đậm tiêu đề */
+    padding-left: 100px;
+}
+
+.custom-image {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước container */
+    height: auto;
+    width: 70%; /* Tăng kích thước ảnh lên 80% so với container */
+}
+
+.custom-background {
+    /* Các thuộc tính khác của custom-background */
+    background-image: url("https://png.pngtree.com/background/20210715/original/pngtree-background-white-picture-image_1281315.jpg"); 
+    background-size: cover; /* Điều chỉnh kích thước hình ảnh */
+    background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+    margin-top: auto;
+    margin-bottom: auto;
+    
+  }
+
+  
+.row{
+    margin: 10px;
+}

@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div class="container mt-4">
+    <!-- Hot sale banner -->
+    <div class="row mb-4">
+      <div class="col text-center">
+        <div class="bg-warning text-dark p-3">HOTSALE CUỐI TUẦN</div>
+      </div>
+      <div class="col text-center">
+        <div class="bg-light text-dark p-3">ƯU ĐÃI THANH TOÁN</div>
+      </div>
+      <div class="col text-center">
+        <div class="bg-danger text-light p-3">KHUYẾN MÃI HOT</div>
+      </div>
+      
+    </div>
+  
+    <!-- Promotion cards -->
+    <div class="row">
+      <div class="col-md-3 mb-4" *ngFor="let promo of promotions">
+        <div class="card">
+          <img [src]="promo.image" class="card-img-top" alt="Promotion image">
+          <div class="card-body">
+            <h5 class="card-title">{{ promo.title }}</h5>
+            <p class="card-text">{{ promo.description }}</p>
+            <button class="btn btn-danger">Xem chi tiết</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<app-footer></app-footer>

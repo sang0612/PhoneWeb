@@ -1,0 +1,106 @@
+<div class="container">
+  <h2>Sign Up</h2>
+  <p>CREATE A NEW ACCOUNT</p>
+  <form [formGroup]="registerForm" (ngSubmit)="onSignUp()">
+
+    <label for="username">Username:</label>
+    <input 
+      type="text" 
+      id="username" 
+      formControlName="userName" 
+      placeholder="Enter your username"
+    >
+    <small *ngIf="registerForm.controls['userName'].dirty && registerForm.hasError('required', 'userName')" class="text-danger">
+       *Username is required
+    </small>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email" 
+        placeholder="Enter your email"
+      >
+      <small *ngIf="registerForm.controls['email'].dirty && registerForm.hasError('required', 'email')" class="text-danger"> *Email is required</small>
+      <small *ngIf="registerForm.controls['email'].dirty && registerForm.hasError('email', 'email')" class="text-danger"> *Invalid email format</small>
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input 
+        type="text" 
+        id="phoneNumber" 
+        formControlName="phoneNumber" 
+        placeholder="Enter your phone number"
+      >
+      <small *ngIf="registerForm.controls['phoneNumber'].dirty && registerForm.hasError('required', 'phoneNumber')" class="text-danger">
+        *Phone number is required
+      </small>
+      <small *ngIf="registerForm.controls['phoneNumber'].dirty && registerForm.hasError('pattern', 'phoneNumber')" class="text-danger">
+        *Invalid phone number format
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <div class="password-wrapper">
+        <input 
+          type="{{ showPassword ? 'text' : 'password' }}" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Enter your password"
+          autocomplete="off"
+        >
+        <i 
+          class="fa" 
+          [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" 
+          (click)="togglePasswordVisibility('password')">
+        </i>
+        <small *ngIf="registerForm.controls['password'].dirty && registerForm.hasError('required', 'password')" class="text-danger"> *Password is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirm-password">Confirm Password:</label>
+      <div class="password-wrapper">
+        <input 
+          type="{{ showConfirmPassword ? 'text' : 'password' }}" 
+          id="confirm-password" 
+          formControlName="confirmPassword" 
+          placeholder="Confirm your password"
+          autocomplete="off"
+        >
+        <i 
+          class="fa" 
+          [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'" 
+          (click)="togglePasswordVisibility('confirm-password')">
+        </i>
+        <small *ngIf="registerForm.controls['confirmPassword'].dirty && registerForm.hasError('required', 'confirmPassword')" class="text-danger"> *Confirm password is required</small>
+        <small *ngIf="registerForm.hasError('mismatch')" class="text-danger"> *Passwords must match</small>
+      </div>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSignUp()">
+      <button type="submit" [disabled]="registerForm.invalid || formSubmitted">Register</button>
+    </form>
+    
+    <div class="social-login">
+      <button class="social-button">
+        <i class="fab fa-google social-icon"></i> Sign up with Google
+      </button>
+      <button class="social-button">
+        <i class="fab fa-facebook-f social-icon"></i> Sign up with Facebook
+      </button>
+    </div>
+
+    <div class="already-account">
+      Already have an account? 
+      <a routerLink="/login">Log in</a>
+    </div>
+    
+    <div class="footer">
+      © 2023 All Rights Reserved. Galaxy
+    </div>
+  </form>
+</div>

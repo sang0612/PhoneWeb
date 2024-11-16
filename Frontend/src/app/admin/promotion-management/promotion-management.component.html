@@ -1,0 +1,160 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="cart-container">
+    <h1>Quản lý khuyến mãi</h1>
+  
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Danh sách khuyến mãi</h2>
+        <button type="button" class="btn-them" (click)="openCreatePromotionModal()">Thêm khuyến mãi</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên</th>
+              <th>Mô tả</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let promotion of promotions" (click)="getPromtionById(promotion.id)">
+              <td>{{ promotion.id }}</td>
+              <td><a href="javascript:void(0)">{{ promotion.name }}</a></td>
+              <td>{{ promotion.description }}</td>
+              <td>{{ promotion.dateStart | date }}</td>
+              <td>{{ promotion.dateEnd | date }}</td>
+              <td class="text-center">
+                <button class="btn btn-danger" (click)="deleteBrand(promotion.id)">Xóa</button>
+                <button class="btn btn-primary" (click)="openPromotionDetailModal(promotion)">Sửa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- <div class="col-md-6" *ngIf="currentPromotion">
+        <h2>Chi tiết khuyến mãi</h2>
+        <form>
+          <div class="form-group">
+            <label for="promotionName">Tên khuyến mãi:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="currentPromotion.name" name="promotionName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="currentPromotion.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dateStart">Ngày bắt đầu:</label>
+            <input type="date" class="form-control" id="dateStart" [(ngModel)]="currentPromotion.dateStart" name="dateStart">
+          </div>
+          <div class="form-group">
+            <label for="dateEnd">Ngày kết thúc:</label>
+            <input type="date" class="form-control" id="dateEnd" [(ngModel)]="currentPromotion.dateEnd" name="dateEnd">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="updateBrand()">Cập nhật</button>
+        </form>
+      </div> -->
+
+      <!-- Modal Chi tiết Khuyến mãi -->
+<div class="modal fade" id="promotionDetailModal" tabindex="-1" aria-labelledby="promotionDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="promotionDetailModalLabel">Chi tiết khuyến mãi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="promotionName">Tên khuyến mãi:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="currentPromotion.name" name="promotionName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="currentPromotion.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dateStart">Ngày bắt đầu:</label>
+            <input type="date" class="form-control" id="dateStart" [(ngModel)]="currentPromotion.dateStart" name="dateStart">
+          </div>
+          <div class="form-group">
+            <label for="dateEnd">Ngày kết thúc:</label>
+            <input type="date" class="form-control" id="dateEnd" [(ngModel)]="currentPromotion.dateEnd" name="dateEnd">
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="updateBrand()">Cập nhật</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateBrand()">Cập nhật</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  
+    <!-- <div class="row">
+      <div class="col-md-6">
+        <h2>Tạo khuyến mãi mới</h2>
+        <form>
+          <div class="form-group">
+            <label for="promotionName">Tên khuyến mãi:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="newPromotion.name" name="promotionName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="newPromotion.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dateStart">Ngày bắt đầu:</label>
+            <input type="date" class="form-control" id="dateStart" [(ngModel)]="newPromotion.dateStart" name="dateStart">
+          </div>
+          <div class="form-group">
+            <label for="dateEnd">Ngày kết thúc:</label>
+            <input type="date" class="form-control" id="dateEnd" [(ngModel)]="newPromotion.dateEnd" name="dateEnd">
+          </div>
+          <button type="button" class="btn btn-primary" (click)="createBrand(newPromotion.name, newPromotion.description, newPromotion.dateStart, newPromotion.dateEnd)">Tạo khuyến mãi</button>
+        </form>
+      </div>
+    </div> -->
+
+    <!-- Modal Tạo Khuyến mãi Mới -->
+<div class="modal fade" id="createPromotionModal" tabindex="-1" aria-labelledby="createPromotionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createPromotionModalLabel">Tạo khuyến mãi mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="promotionName">Tên khuyến mãi:</label>
+            <input type="text" class="form-control" id="promotionName" [(ngModel)]="newPromotion.name" name="promotionName">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" [(ngModel)]="newPromotion.description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="dateStart">Ngày bắt đầu:</label>
+            <input type="date" class="form-control" id="dateStart" [(ngModel)]="newPromotion.dateStart" name="dateStart">
+          </div>
+          <div class="form-group">
+            <label for="dateEnd">Ngày kết thúc:</label>
+            <input type="date" class="form-control" id="dateEnd" [(ngModel)]="newPromotion.dateEnd" name="dateEnd">
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="createBrand(newPromotion.name, newPromotion.description, newPromotion.dateStart, newPromotion.dateEnd)">Tạo khuyến mãi</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createBrand(newPromotion.name, newPromotion.description, newPromotion.dateStart, newPromotion.dateEnd)">Tạo khuyến mãi</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+  </div>
+  <app-footer></app-footer>

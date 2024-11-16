@@ -1,0 +1,141 @@
+<!-- <div class="container mt-5">
+    <h2>Thanh toán đơn hàng</h2> -->
+  
+    <!-- Thông tin khách hàng -->
+    <!-- <div class="row">
+      <div class="col-md-6">
+        <h3>Thông tin khách hàng</h3>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name">Họ và tên:</label>
+            <input [(ngModel)]="customer.name" name="name" type="text" class="form-control" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input [(ngModel)]="customer.email" name="email" type="email" class="form-control" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Địa chỉ:</label>
+            <input [(ngModel)]="customer.address" name="address" type="text" class="form-control" id="address" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Số điện thoại:</label>
+            <input [(ngModel)]="customer.phone" name="phone" type="text" class="form-control" id="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phương thức thanh toán:</label>
+            <input [(ngModel)]="customer.phone" name="phone" type="text" class="form-control" id="phone" required>
+          </div>
+         
+        </form>
+        
+      </div>
+   -->
+      <!-- Thông tin đơn hàng -->
+      <!-- <div class="col-md-6">
+        <h3>Thông tin đơn hàng</h3>
+        <div class="list-group">
+          <div *ngFor="let product of products" class="list-group-item">
+            <h5>{{ product.name }}</h5>
+            <p>Số lượng: {{ product.quantity }}</p>
+            <p>Giá: {{ product.price | currency }}</p>
+            <p>Tổng: {{ product.price * product.quantity | currency }}</p>
+          </div>
+        </div>
+        <hr>
+        <h4>Tổng tiền: {{ totalPrice | currency }}</h4>
+      </div>
+    </div>
+   -->
+    <!-- Nút thanh toán -->
+    <!-- <div class="row mt-4">
+      <div class="col-md-12">
+        <button class="btn btn-primary btn-lg btn-block" (click)="onSubmit()">Thanh toán</button>
+      </div>
+    </div>
+  </div>
+   -->
+
+   <div class="container mt-4">
+    <h2>Thanh toán</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Địa Chỉ Nhận Hàng</h2>
+        <div class="address-box">
+          <p><strong>Nguyễn Văn A (+84) 585740655</strong></p>
+          <p>S125 Nguyễn Trãi, Thanh Xuân, Hà Nội, Phường Khương Đình, Quận Thanh Xuân, Hà Nội</p>
+          <a href="#" class="btn btn-link">Thay Đổi</a>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h2>Sản phẩm</h2>
+        <div class="product-box">
+          <!-- <div class="product-info">
+            <p>[ HÀNG CHÍNH HÃNG ] ĐIỆN THOẠI SAMSUNG</p>
+            <p>₫989.000</p>
+          </div> -->
+
+        <!-- <div class="col-md-6">
+        <h3>Thông tin đơn hàng</h3>
+        <div class="list-group">
+          <div *ngFor="let product of products" class="list-group-item">
+            <h5>{{ product.name }}</h5>
+            <p>Số lượng: {{ product.quantity }}</p>
+            <p>Giá: {{ product.price | currency }}</p>
+            <p>Tổng: {{ product.price * product.quantity | currency }}</p>
+          </div>
+        </div>
+        <hr>
+        <h4>Tổng tiền: {{ totalPrice | currency }}</h4>
+      </div> -->
+
+          <!-- <div class="shop-voucher">
+            <a href="#" class="btn btn-link">Chọn Voucher Khác</a>
+            <p>-₫50.000</p>
+          </div> -->
+
+          <div class="product-info d-flex align-items-center">
+            <img src="https://sieuthismartphone.com/data/product/small/small_amt1608534646.jpg" alt="Sản phẩm" class="product-image" width="50" height="50">
+            <div class="product-details">
+              <h5>ĐIỆN THOẠI SAMSUNG IPHONE XSMAX</h5>
+              <!-- <p>Yêu thích | Anh long store | <a href="#" class="chat-link">Chat ngay</a></p>
+              <p><span class="badge bg-danger">Đổi ý miễn phí 15 ngày</span></p> -->
+            </div>
+            
+            <div class="product-quantity text-center">
+              <p>1</p>
+            </div>
+            <div class="product-total-price text-right">
+              <p>₫989.000</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <p><strong>Lời nhắn:</strong></p>
+        <input type="text" class="form-control" placeholder="Lưu ý cho Người bán...">
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h3>Thông tin đơn hàng</h3>
+        <ul class="list-group">
+          <li class="list-group-item">Tổng tiền hàng: <span class="float-right">₫989.000</span></li>
+          <li class="list-group-item">Phí vận chuyển: <span class="float-right">₫16.500</span></li>
+          <!-- <li class="list-group-item">Tổng cộng Voucher giảm giá: <span class="float-right">-₫50.000</span></li> -->
+          <li class="list-group-item"><strong>Tổng thanh toán: <span class="float-right text-danger">₫955.500</span></strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <button class="btn btn-danger btn-lg btn-block">Đặt hàng</button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,13 @@
+.cart-container {
+    /* Styles for the cart container */
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .total-price {
+    /* Styles for the total price */
+    font-weight: bold;
+    margin-top: 10px;
+  }

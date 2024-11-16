@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="cart-container">
+    <h1>Quản lý thương hiệu</h1>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Danh sách thương hiệu</h2>
+        <button type="button" class="btn-them" (click)="toggleCreateBrandForm()">Thêm thương hiệu</button>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên thương hiệu</th>
+              <th>Mô tả</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let brand of brands" >
+              <td>{{ brand.id }}</td>
+              <td><a href="javascript:void(0)">{{ brand.name }}</a></td>
+              <td>{{ brand.description }}</td>
+              <td>
+                <button class="btn btn-danger" (click)="deleteBrand(brand.id)">Xóa</button>
+                <button class="btn btn-primary" (click)="openBrandModal(brand)">Sửa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="brandModal" tabindex="-1" aria-labelledby="brandModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="brandModalLabel">Thông tin thương hiệu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="brandName">Tên thương hiệu:</label>
+                <input type="text" class="form-control" id="brandName" [(ngModel)]="currentBrand.name" name="brandName">
+              </div>
+              <div class="form-group">
+                <label for="description">Mô tả:</label>
+                <textarea class="form-control" id="description" [(ngModel)]="currentBrand.description" name="description"></textarea>
+              </div>
+              <!-- <button type="button" class="btn btn-primary" (click)="updateBrand()">Cập nhật</button> -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateBrand()">Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createBrandModal" tabindex="-1" aria-labelledby="createBrandModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createBrandModalLabel">Tạo thương hiệu mới</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="brandName">Tên thương hiệu:</label>
+                <input type="text" class="form-control" id="brandName" [(ngModel)]="newBrand.name" name="brandName">
+              </div>
+              <div class="form-group">
+                <label for="description">Mô tả:</label>
+                <textarea class="form-control" id="description" [(ngModel)]="newBrand.description" name="description"></textarea>
+              </div>
+              <!-- <button type="button" class="btn btn-primary" (click)="createBrand(newBrand.name, newBrand.description)">
+                Tạo thương hiệu
+              </button> -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createBrand(newBrand.name, newBrand.description)">Tạo thương hiệu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

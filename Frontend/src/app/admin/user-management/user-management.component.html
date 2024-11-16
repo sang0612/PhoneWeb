@@ -1,0 +1,253 @@
+<app-navbar></app-navbar>
+<div class="container ">
+  <div class="cart-container">
+ <div class="container">
+  <h1>Quản lý người dùng</h1>
+  <h2>Danh sách người dùng</h2>
+  <div class="search-filter">
+    <input type="text" [(ngModel)]="filter" (input)="loadUsers()" placeholder="Search by name" />
+    <!-- <select [(ngModel)]="sortBy" (change)="loadUsers()">
+      <option value="name">Name</option>
+      <option value="id">ID</option>
+    </select> -->
+  </div>
+  <div class="row container">
+    <div class="col-12">
+      <button type="button" class="btn-them" style="display: block; width: 15%;" (click)="openCreateUserModal()">Thêm người dùng</button>
+    </div>
+    <div class="col-12">
+      <button type="button" class="btn-them" style="display: block; width: 15%;" (click)="openCreateRoleModal()">Thêm vai trò</button>
+    </div>
+  </div>
+
+  <!-- Modal Thêm vai trò -->
+<div class="modal fade" id="createRoleModal" tabindex="-1" aria-labelledby="createRoleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createRoleModalLabel">Thêm vai trò</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="roleName">Tên vai trò:</label>
+            <input type="text" class="form-control" id="roleName" [(ngModel)]="newRole.roleName" name="roleName">
+          </div>
+          <div class="form-group">
+            <label for="roleDescription">Mô tả vai trò:</label>
+            <textarea class="form-control" id="roleDescription" [(ngModel)]="newRole.roleDescription" name="roleDescription"></textarea>
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="createRole()">Tạo vai trò</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="createRole()" data-bs-dismiss="modal">Tạo vai trò</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.id }}</td>
+        <td><a href="javascript:void(0)" (click)="getUserById(user.id)">{{ user.userName }}</a></td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteUser(user.id)">Xóa</button>
+          <button class="btn btn-primary" (click)="openUserDetailModal(user)">Sửa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="pageIndex = pageIndex - 1; loadUsers()" [disabled]="pageIndex <= 1">
+      Previous
+    </button>
+    <span>Page {{ pageIndex }}</span>
+    <button
+      (click)="pageIndex = pageIndex + 1; loadUsers()"
+      [disabled]="paginateResult.totalPages <= pageIndex"
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+  
+
+  <!-- <div class="row"> -->
+    <!-- <div class="col-md-6" *ngIf="currentUser">
+       <h2>Thông tin người dùng</h2>
+      <form>
+        <div class="form-group">
+          <label for="userName">Tên người dùng:</label>
+          <input type="text" class="form-control" id="userName" [(ngModel)]="currentUser.userName" name="userName">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="currentUser.email" name="email" >
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="currentUser.password" name="password" >
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">PhoneNumber:</label>
+          <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="currentUser.phonenumber" name="phoneNumber" >
+        </div>
+        <div class="form-group">
+          <label for="role">role</label>
+          <input type="text" class="form-control" id="role" [(ngModel)]="currentUser.role" name="role" >
+        </div>
+        <button type="button" class="btn btn-primary" (click)="updateUser()">Cập nhật</button>
+      </form>
+    </div> -->
+
+    <!-- Modal Thông tin người dùng -->
+<div class="modal fade" id="userDetailModal" tabindex="-1" aria-labelledby="userDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userDetailModalLabel">Thông tin người dùng</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="userName">Tên người dùng:</label>
+            <input type="text" class="form-control" id="userName" [(ngModel)]="currentUser.userName" name="userName">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="currentUser.email" name="email" >
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu:</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="currentUser.password" name="password" >
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Số điện thoại:</label>
+            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="currentUser.phonenumber" name="phoneNumber" >
+          </div>
+          <div class="form-group">
+            <label for="role">Vai trò:</label>
+            <input type="text" class="form-control" id="role" [(ngModel)]="currentUser.role" name="role" >
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="updateUser()">Cập nhật</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="updateUser()" data-bs-dismiss="modal">Cập nhật</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- <div class="col-md-6">
+      <h2>Tạo người dùng mới</h2>
+      <form>
+        <div class="form-group">
+          <label for="userName">Tên người dùng:</label>
+          <input type="text" class="form-control" id="userName" [(ngModel)]="newUser.userName" name="userName">
+        </div>
+      
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="newUser.email" name="email">
+        </div>
+      
+        <div class="form-group">
+          <label for="password">Mật khẩu:</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="newUser.password" name="password">
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">SĐT:</label>
+          <input type="phoneNumber" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber" name="phoneNumber">
+        </div>
+
+        <div class="form-group">
+          <label for="role">Vai trò:</label>
+          <input type="role" class="form-control" id="role" [(ngModel)]="newUser.role" name="role">
+        </div>
+      
+        <button type="button" class="btn btn-primary" (click)="createUser(newUser.userName,newUser.email,newUser.password,newUser.phoneNumber,newUser.role)">
+          Tạo người dùng
+        </button>
+      </form>      
+    </div> -->
+
+    <!-- Modal Tạo người dùng mới -->
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createUserModalLabel">Tạo người dùng mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="userName">Tên người dùng:</label>
+            <input type="text" class="form-control" id="userName" [(ngModel)]="newUser.userName" name="userName">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="newUser.email" name="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu:</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="newUser.password" name="password">
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Số điện thoại:</label>
+            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber" name="phoneNumber">
+          </div>
+          <div class="form-group">
+            <label for="role">Vai trò:</label>
+            <input type="text" class="form-control" id="role" [(ngModel)]="newUser.role" name="role">
+          </div>
+          <!-- <button type="button" class="btn btn-primary" (click)="createUser(newUser.userName, newUser.email, newUser.password, newUser.phoneNumber, newUser.role)">Tạo người dùng</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="createUser(newUser.userName, newUser.email, newUser.password, newUser.phoneNumber, newUser.role)" data-bs-dismiss="modal">Tạo người dùng</button>
+      </div>
+    </div>
+  </div>
+<!-- </div> -->
+
+    <!-- <div class="col-md-6">
+      <form>
+       <h2>Thêm vai trò</h2>
+        <div class="form-group">
+          <label for="roleName">Tên vai trò:</label>
+          <input type="text" class="form-control" id="roleName" [(ngModel)]="newRole.roleName" name="roleName">
+        </div>
+        <div class="form-group">
+          <label for="roleDescription">Mô tả vai trò:</label>
+          <textarea class="form-control" id="roleDescription" [(ngModel)]="newRole.roleDescription" name="roleDescription"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="createRole()">Tạo vai trò</button>
+        <button type="button" class="btn btn-danger" (click)="deleteRole(newRole.roleName)">Xóa vai trò</button>
+      </form>
+    </div> -->
+ 
+</div>
+</div>
+<app-footer></app-footer>

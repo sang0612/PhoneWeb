@@ -1,0 +1,40 @@
+<div class="review-container">
+  <!-- Form for Adding a Review -->
+  <form [formGroup]="reviewForm" (ngSubmit)="addReview()" class="review-form">
+    <textarea
+      formControlName="comment"
+      placeholder="Write your review here..."
+      rows="4"
+    ></textarea>
+    <div *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched" class="error-message">
+      <div *ngIf="reviewForm.get('comment')?.errors?.['required']">Comment is required.</div>
+      <div *ngIf="reviewForm.get('comment')?.errors?.['minlength']">Comment must be at least 10 characters long.</div>
+    </div>
+    <button type="submit" [disabled]="reviewForm.invalid || !isLoggedIn" >Submit Review</button>
+    <button type="button" (click)="cancelEdit()" *ngIf="editingReview" class="cancel-button">Cancel</button>
+  </form>
+
+  <!-- Button to Show/Hide Reviews -->
+  <button (click)="toggleReviews()" class="toggle-button">
+    {{ showReviews ? 'Hide Reviews' : 'Show Reviews' }}
+  </button>
+
+  <!-- Display Reviews Conditionally -->
+  <div *ngIf="showReviews">
+    <div *ngIf="reviews.length > 0" class="reviews-list">
+      <div *ngFor="let review of reviews" class="review-item">
+        <p>
+          <strong>{{ review.userName || 'Anonymus User' }}</strong>: {{ review.comment }}
+        </p>
+        <div class="review-actions">
+          <button (click)="editReview(review)" *ngIf="review.userId === userId" class="edit-button">Edit</button>
+          <button (click)="deleteReview(review)" *ngIf="review.userId === userId" class="delete-button">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="reviews.length === 0" class="no-reviews">
+      <p>No reviews yet.</p>
+    </div>
+  </div>
+</div>

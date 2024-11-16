@@ -1,0 +1,23 @@
+.card {
+    border: none;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: gray;
+  }
+  
+  .btn-danger {
+    width: 100%;
+  }
+  

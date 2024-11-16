@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Log In</h2>
+  <p>PLEASE LOGIN TO CONTINUE TO YOUR ACCOUNT</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="ngOnInit()">
+    <label for="username">Username:</label>
+    <input 
+      type="text" 
+      id="username" 
+      formControlName="username" 
+      placeholder="Enter your username"
+    >
+    <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required', 'username')" class="text-danger">
+      *Username is required
+    </small>
+    
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <div class="password-wrapper">
+        <input 
+          type="{{ showPassword ? 'text' : 'password' }}" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Enter your password"
+          autocomplete="off"
+        >
+        <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="text-danger">
+          *Password is required
+        </small>
+        <i 
+          class="fa" 
+          [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" 
+          (click)="togglePasswordVisibility()">
+        </i>
+      </div>
+    </div>
+
+    <div class="remember">
+      <input type="checkbox" id="remember" name="remember">
+      <label for="remember">Remember Me</label>
+    </div>
+
+    <button (click)="onLogin()" type="submit" [disabled]="loginForm.invalid">LOG IN</button>
+
+    <div>
+      <a routerLink="/forgot-password">Forgot Password?</a>
+    </div>
+    
+    <div>
+      Don't have an account?
+      <a routerLink="/register"> Register</a>
+    </div>   
+
+    <div class="social-login">
+      <button class="social-button">
+        <i class="fab fa-google social-icon"></i> Sign in with Google
+      </button>
+      <button class="social-button">
+        <i class="fab fa-facebook-f social-icon"></i> Sign in with Facebook
+      </button>
+    </div>
+  </form>      
+</div>

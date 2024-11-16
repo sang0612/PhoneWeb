@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+    <main>
+        <!-- Hero Section -->
+
+    <div class=" row align-items-center justify-content-center  custom-background">
+        <div class="col-md-6 text-center">
+        <h1 class="custom-heading">Your Destination for Cutting-Edge Mobile Devices</h1>
+        </div>
+        <div class="col-md-6 text-center">
+        <img src="https://pos.nvncdn.com/f2169f-49462/ps/20191018_sFUggPGkt8CpScISF8zh0huX.png" class="img-fluid custom-image" alt="Mobile Devices">
+        </div>
+    </div>
+
+    <!-- Search Filters -->
+    <div class="row justify-content-center bg-custom text-white py-3">
+        <div class="col-md-3">
+            <select class="form-select bg-custom-select text-white" [(ngModel)]="selectedPriceRange">
+                <option [value]="null" selected>Price</option>
+                <option [value]="500"> $0 - $500</option>
+                <option [value]="1000"> $0 - $1000</option>
+                <option [value]="2000"> $0 - $2000</option>
+                <option [value]="3000"> $0 - $3000</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select bg-custom-select text-white" [(ngModel)]="selectedBrand">
+                <option [value]="null" selected>Brand</option>
+                <option value="Apple">Apple</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Xiaomi">Xiaomi</option>
+                <option value="Sony">Sony</option>
+                <option value="Huawei">Huawei</option>
+                <option value="OPPO">OPPO</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100" (click)="filterProducts()">Search</button>
+        </div>
+    </div>
+    
+    
+    <div class="container"> 
+    <div class="row">
+        <!-- Quảng cáo -->
+        <div class="col-lg-3">
+            <div class="filters p-3">
+            <div class="row">
+                <div class="col-md-12 mb-3" *ngFor="let promo of promotions">
+                  <div class="card">
+                    <img [src]="promo.image" class="card-img-top" alt="Promotion image">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ promo.title }}</h5>
+                      <p class="card-text">{{ promo.description }}</p> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                <!-- Phần Hiển Thị Sản Phẩm (Product Cards) -->
+                <!-- <app-product-list></app-product-list>  -->
+                <app-product-list [products]="products"></app-product-list>
+            </div> 
+            </div>
+        </div> 
+    </div>   
+    </main>
+<app-footer></app-footer>
+
+

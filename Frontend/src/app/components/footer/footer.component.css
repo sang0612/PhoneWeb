@@ -1,0 +1,41 @@
+.footer {
+    background-color: #3f6184; /* Màu nền phù hợp với navbar */
+    color: #ffffff; /* Màu chữ trắng */
+    padding: 20px 0;
+}
+
+.footer h5 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin: 0;
+    color: #dcdcdc; /* Màu chữ */
+}
+
+.footer a {
+    color: #5faeb6; 
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #00ffff; /* Màu khi hover */
+    text-decoration: underline;
+}
+
+.footer .btn-primary {
+    background-color: #5faeb6;
+    border: none;
+    margin-right: 5px;
+}
+
+.footer .btn-primary:hover {
+    background-color: #00ffff;
+}
+
+.footer .text-center {
+    border-top: 1px solid #dcdcdc;
+    padding-top: 10px;
+    margin-top: 20px;
+}

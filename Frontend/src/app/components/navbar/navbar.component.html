@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item ">
+        <a class="nav-link text-light" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" routerLink="/home">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" routerLink="/promotion">Promotion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" routerLink="/home">Explore More</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav d-flex">
+      <!-- <li class="nav-item">
+        <a class="nav-link text-light" routerLink='/cart'> 
+          <fa-icon [icon]="faShoppingCart"></fa-icon> 
+        </a> 
+      </li> -->
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+        <button class="btn btn-primary ms-2" routerLink='/login'>Login</button>
+      </li>
+      <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+        <button class="btn btn-primary ms-2" routerLink="/register">Register</button>
+      </li>
+      <!-- <li class="nav-item" *ngIf="authService.isLoggedIn()">
+        <button class="btn btn-primary ms-2" (click)="authService.logout();setFalse()">Logout</button>
+      </li> -->
+
+      <!-- <button *ngIf="isAdmin" class="admin-button">
+        Admin Dashboard
+    </button> -->
+    
+    <!-- Nút cho Customer -->
+    <!-- <button *ngIf="isCustomer" class="customer-button">
+        Customer Dashboard
+    </button> -->
+
+    <li class="nav-item dropdown"  *ngIf="authService._localStorage?.getItem('isCustomer') === 'true'">
+      <a  class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" (click)="toggleDropdown()" aria-expanded="false">
+        <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" routerLink="/app-profile">Tài khoản của tôi</a></li>
+        <li><a class="dropdown-item" routerLink="/cart">Giỏ hàng</a></li>
+        <li><a class="dropdown-item" (click)="authService.logout(); setFalse()">Đăng xuất</a></li>
+      </ul>
+    </li>
+
+    <li class="nav-item dropdown" *ngIf="authService._localStorage?.getItem('isAdmin') === 'true'">
+      <a  class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" (click)="toggleDropdown()" aria-expanded="false">
+        <fa-icon [icon]="faUser" class="custom-icon"></fa-icon>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" routerLink="/app-profile">Tài khoản của tôi</a></li>
+        <li><a class="dropdown-item" routerLink="/user-management">Quản lý người dùng</a></li>
+        <li><a class="dropdown-item" routerLink="/product-management">Quản lý sản phẩm</a></li>
+        <li><a class="dropdown-item" routerLink="/brand-management">Quản lý thương hiệu</a></li>
+        <li><a class="dropdown-item" routerLink="/promotion-management">Quản lý quảng cáo</a></li>
+        <li><a class="dropdown-item" (click)= "authService.logout(); setFalse()" >Đăng xuất</a></li>
+      </ul>
+    </li>
+    
+    </ul>
+  </div>
+
+</nav>

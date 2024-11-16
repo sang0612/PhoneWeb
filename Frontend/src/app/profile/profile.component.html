@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<h1 class="profile-title">Tài khoản của tôi</h1>
+<div class="profile-container" *ngIf="user">
+  
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <img src="https://antimatter.vn/wp-content/uploads/2022/11/anh-avatar-trang-fb-mac-dinh.jpg" alt="Profile Picture" />
+    </div>
+    <div class="profile-info">
+      <p>Tên đăng nhập: {{ user.name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Phone: {{ user.phoneNumber }}</p>
+      <!-- Thêm các thông tin khác nếu cần -->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!user" class="loading-container">
+  <p>Loading user profile...</p>
+</div>
+
+<app-footer></app-footer>
